@@ -1,0 +1,65 @@
+--
+-- Table structure for table 'users'
+--
+CREATE TABLE IF NOT EXISTS `users` (
+    `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+    `email` VARCHAR(254) NOT NULL,
+    `name` VARCHAR(100) NOT NULL,
+    `surname` VARCHAR(100) NOT NULL,
+    `password` TEXT NOT NULL,
+     PRIMARY KEY usnique_user (`id`,`email`)
+);
+
+--
+-- Warehouse categories table
+--
+CREATE TABLE IF NOT EXISTS `device_categories` (
+    `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(100) NOT NULL,
+    PRIMARY KEY (`id`)
+);
+
+insert into device_categories(name) VALUES('industrial_trucks');
+insert into device_categories(name) VALUES('engineered_systems');
+insert into device_categories(name) VALUES('material_handlers');
+insert into device_categories(name) VALUES('handling_equipments');
+
+--
+-- Table structure for table 'devices'
+--
+CREATE TABLE IF NOT EXISTS `devices` (
+    `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+    `category_id` BIGINT(20),
+    `name` VARCHAR(100) NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `available` INT,
+     PRIMARY KEY (`id`),
+     FOREIGN KEY (category_id) REFERENCES device_categories(id) ON DELETE CASCADE
+);
+--
+-- Inserting tool categories
+--
+insert into devices(category_id,name,created_at,available) VALUES(1,'Hand Trucks',NOW(),20);
+insert into devices(category_id,name,created_at,available) VALUES(1,'Side-loaders',NOW(),40);
+insert into devices(category_id,name,created_at,available) VALUES(1,'Pallet trucks',NOW(),10);
+insert into devices(category_id,name,created_at,available) VALUES(1,'Walkie stackers',NOW(),5);
+insert into devices(category_id,name,created_at,available) VALUES(1,'Order pickers',NOW(),30);
+insert into devices(category_id,name,created_at,available) VALUES(1,'Forklifts',NOW(),50);
+
+insert into devices(category_id,name,created_at,available) VALUES(2,'AGVs',NOW(),11);
+insert into devices(category_id,name,created_at,available) VALUES(2,'Conveyor belts',NOW(),61);
+insert into devices(category_id,name,created_at,available) VALUES(2,'Robotic delivery system',NOW(),7);
+
+insert into devices(category_id,name,created_at,available) VALUES(3,'Stackers and reclaimers',NOW(),11);
+insert into devices(category_id,name,created_at,available) VALUES(3,'Hoppers',NOW(),11);
+insert into devices(category_id,name,created_at,available) VALUES(3,'Grain elevators',NOW(),11);
+insert into devices(category_id,name,created_at,available) VALUES(3,'Bucket elevators',NOW(),11);
+insert into devices(category_id,name,created_at,available) VALUES(3,'Screw Conveyor',NOW(),11);
+insert into devices(category_id,name,created_at,available) VALUES(3,'Rotary car dumper',NOW(),11);
+
+insert into devices(category_id,name,created_at,available) VALUES(4,'Drawers',NOW(),101);
+insert into devices(category_id,name,created_at,available) VALUES(4,'Stacking frames',NOW(),52);
+insert into devices(category_id,name,created_at,available) VALUES(4,'Flow racks',NOW(),11);
+insert into devices(category_id,name,created_at,available) VALUES(4,'Cantiveler racks',NOW(),91);
+
+
